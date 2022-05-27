@@ -1,5 +1,5 @@
 ---
 applications:
   - docker:
-      image: mdawar/rq-exporter
+      image: mdawar/rq-exporter:latest
     health-check-type: port 
