@@ -1,5 +1,5 @@
 ---
 applications:
   - docker:
-      image: mdawar/rq-exporter:latest
+      image: gcr.io/sre-docker-registry/github.com/uktrade/prom-rq-exporter:latest
     health-check-type: port 
