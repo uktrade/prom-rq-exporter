@@ -2,7 +2,7 @@
 
 # Set env vars and display results.
 if [[ ${VCAP_SERVICES} ]]; then
-  echo "Setting \$RQ_REDIS_URL to \$VCAP_SERVICES.redis.credentials.uri value (private)."
+  echo "Setting --redis-url exporter arg to \$VCAP_SERVICES.redis.credentials.uri value (private)."
   RQ_REDIS_URL_ARG="--redis-url $(echo ${VCAP_SERVICES} | jq .redis[].credentials.uri -r)"
 else
   echo "\$VCAP_SERVICES env var not set. \$RQ_REDIS_URL (if set) will be used by the exporter."
@@ -12,10 +12,10 @@ else
 fi
 
 if [[ ${PORT} ]]; then
-  echo "Setting \$RQ_EXPORTER_PORT to \$PORT env var value (which is ${PORT})."
+  echo "Setting --port exporter arg to \$PORT env var value (which is ${PORT})."
   RQ_EXPORTER_PORT_ARG="--port ${PORT}"
 else
-  echo "\$PORT env var not set so unless\$RQ_EXPORTER_PORT is otherwise set, the exporter will expect 9726."
+  echo "\$PORT env var not set so unless\$RQ_EXPORTER_PORT is otherwise set, the exporter will be served on port 9726."
 fi
 
 # Run the exporter
