@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set env vars and display results.
-if [[ $VCAP_SERVICES ]]; then
+if ! [[ -z $VCAP_SERVICES ]]; then
   echo "Setting --redis-url exporter arg to \$VCAP_SERVICES.redis.credentials.uri value (private)."
   RQ_REDIS_URL_ARG="--redis-url $(echo $VCAP_SERVICES | jq .redis[].credentials.uri -r)"
 else
@@ -11,7 +11,7 @@ else
   fi
 fi
 
-if [[ $PORT ]]; then
+if ! [[ -z $PORT ]]; then
   echo "Setting --port exporter arg to \$PORT env var value (which is $PORT)."
   RQ_EXPORTER_PORT_ARG="--port $PORT"
 else
