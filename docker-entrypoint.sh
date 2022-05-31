@@ -20,4 +20,5 @@ fi
 
 # Run the exporter
 echo "Starting rq_exporter..."
+echo "python -m rq_exporter ${RQ_REDIS_URL_ARG:0:22} $RQ_EXPORTER_PORT_ARG"
 python -m rq_exporter $RQ_REDIS_URL_ARG $RQ_EXPORTER_PORT_ARG
