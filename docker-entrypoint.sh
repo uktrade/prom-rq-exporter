@@ -1,4 +1,23 @@
 #!/bin/bash
-export RQ_REDIS_URL=$(echo $VCAP_SERVICES | jq .redis[].credentials.uri -r)
-export RQ_EXPORTER_PORT=$PORT
+
+# Set env vars and display results.
+if [[ ${VCAP_SERVICES} ]]; then
+  echo "Setting \$RQ_REDIS_URL to \$VCAP_SERVICES.redis.credentials.uri value (private)."
+  export RQ_REDIS_URL=$(echo ${VCAP_SERVICES} | jq .redis[].credentials.uri -r)
+else
+  echo "\$VCAP_SERVICES env var not set. \$RQ_REDIS_URL (if set) will be used by the exporter."
+  if [[ -z ${RQ_REDIS_URL} ]]; then
+    echo "Note that \$RQ_REDIS_URL is not set. Exporter may fail unless redis is local or \$RQ_EXPORTER_HOST is set instead. See https://github.com/mdawar/rq-exporter/blob/master/README.md"
+  fi
+fi
+
+if [[ ${PORT} ]]; then
+  echo "Setting \$RQ_EXPORTER_PORT to \$PORT env var value (which is ${PORT})."
+  export RQ_EXPORTER_PORT=$PORT
+else
+  echo "\$PORT env var not set so unless\$RQ_EXPORTER_PORT is otherwise set, the exporter will expect 9726."
+fi
+
+# Run the exporter
+echo "Starting rq_exporter..."
 python -m rq_exporter
