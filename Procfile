@@ -1,1 +1,1 @@
-worker: docker-entrypoint.sh
+worker: bash docker-entrypoint.sh
