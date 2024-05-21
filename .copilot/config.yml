@@ -2,3 +2,5 @@ repository: prom-rq-exporter
 builder:
   name: paketobuildpacks/builder-jammy-full
   version: 0.3.339
+packs:
+  - paketo-buildpacks/procfile
