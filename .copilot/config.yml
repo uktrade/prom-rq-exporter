@@ -3,4 +3,4 @@ builder:
   name: paketobuildpacks/builder-jammy-full
   version: 0.3.339
 packs:
-  - paketo-buildpacks/procfile
+  - paketo-buildpacks/procfile@5.8.0
