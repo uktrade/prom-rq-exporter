@@ -1,0 +1,1 @@
+rq-exporter==2.1.2
