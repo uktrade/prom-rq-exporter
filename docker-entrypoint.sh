@@ -7,7 +7,8 @@ if ! [[ -z $VCAP_SERVICES ]]; then
 else
   echo "\$VCAP_SERVICES env var not set. \$RQ_REDIS_URL (if set) will be used by the exporter."
   if [[ -z $RQ_REDIS_URL ]]; then
-    echo "Note that \$RQ_REDIS_URL is not set. Exporter may fail unless redis is local or \$RQ_EXPORTER_HOST is set instead. See https://github.com/mdawar/rq-exporter/blob/master/README.md"
+    echo "Note that \$RQ_REDIS_URL is not set from VCAP_SERVICES. If VCAP_SERVICES are being used, Exporter may fail unless redis is local or \$RQ_EXPORTER_HOST is set instead. See https://github.com/mdawar/rq-exporter/blob/master/README.md"
+    RQ_REDIS_URL_ARG="--redis-url $RQ_REDIS_URL_ARG"
   fi
 fi
 
